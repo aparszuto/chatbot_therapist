@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Przenieś sesję</title>
+</head>
+<body>
+    <h2>Przenieś sesję na inne urządzenie</h2>
+    <p>Wprowadź identyfikator sesji, aby kontynuować rozmowę na tym urządzeniu.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Przenieś sesję</button>
+    </form>
+</body>
+</html>

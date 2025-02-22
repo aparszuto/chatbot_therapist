@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot Terapeuta</title>
+    <link rel="stylesheet" href="{% static 'chat/styles.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Chatbot Terapeuta</h2>
+        <div class="session-info">
+            Identyfikator sesji: {{ session_id }}<br>
+            <a href="{% url 'transfer_session' %}">Przenieś sesję na inne urządzenie</a>
+        </div>
+        <div class="chat-window">
+            {% for message in messages %}
+                <div class="message {{ message.sender }}">
+                    <strong>{{ message.sender|capfirst }}:</strong> {{ message.content|linebreaks }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="message-input">
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Wyślij</button>
+            </form>
+        </div>
+        <div class="report-button">
+            <form action="{% url 'report' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Zgłoś rozmowę</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
